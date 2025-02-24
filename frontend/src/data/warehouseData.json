@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Tech Hub NY",
+        "location": "New York"
+    },
+    {
+        "id": 2,
+        "name": "West Coast Logistics",
+        "location": "Los Angeles"
+    },
+    {
+        "id": 3,
+        "name": "Midwest Electronics Depot",
+        "location": "Chicago"
+    },
+    {
+        "id": 4,
+        "name": "Houston Tech Warehouse",
+        "location": "Houston"
+    },
+    {
+        "id": 5,
+        "name": "San Francisco Digital Storage",
+        "location": "San Francisco"
+    },
+    {
+        "id": 6,
+        "name": "Seattle Innovation Center",
+        "location": "Seattle"
+    }
+]

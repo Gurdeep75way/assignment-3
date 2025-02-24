@@ -1,0 +1,21 @@
+supplier_id,supplier_name,location,items_supplied,average_delivery_time,reliability_score
+1,Glenn and Sons,Hodgebury,Clothing,12,1.74
+2,Ellis Group,Carterfort,Accessories,15,4.54
+3,Hanson-Kent,Michaeltown,Electronics,14,1.63
+4,"Patrick, Rogers and Anderson",Port Leslie,Clothing,6,1.42
+5,Parker-Howard,East Nicholas,Electronics,9,3.14
+6,Nichols-Johnson,Port Paulfurt,Accessories,15,3.56
+7,Stevens PLC,Marshtown,Accessories,14,4.28
+8,Cook-Flores,South Toniville,Groceries,11,2.92
+9,Figueroa LLC,Aaronport,Groceries,4,1.14
+10,Dalton Ltd,East Sarafurt,Groceries,9,4.5
+11,Anderson LLC,South Matthewberg,Clothing,4,1.75
+12,"Craig, Hawkins and Sawyer",Lake Cynthia,Electronics,8,4.96
+13,Cervantes-Smith,Kennethburgh,Accessories,12,3.07
+14,Hudson-Nelson,Roseton,Clothing,6,4.88
+15,"Bolton, Meyers and Rogers",Cristianburgh,Accessories,12,1.16
+16,Smith-Mora,Huntchester,Groceries,15,3.79
+17,Jackson Ltd,East Linda,Clothing,4,4.27
+18,Scott Group,New Brittany,Groceries,14,4.78
+19,Brown-Allen,Schroederbury,Groceries,15,4.73
+20,Garcia PLC,East Charles,Groceries,3,1.57

@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "name": "Laptop",
+        "stock": 50,
+        "warehouse": "Tech Hub NY",
+        "price": 800
+    },
+    {
+        "id": 2,
+        "name": "Mouse",
+        "stock": 20,
+        "warehouse": "West Coast Logistics",
+        "price": 25
+    },
+    {
+        "id": 3,
+        "name": "Keyboard",
+        "stock": 60,
+        "warehouse": "Tech Hub NY",
+        "price": 40
+    },
+    {
+        "id": 4,
+        "name": "Monitor",
+        "stock": 30,
+        "warehouse": "Midwest Electronics Depot",
+        "price": 250
+    },
+    {
+        "id": 5,
+        "name": "Headphones",
+        "stock": 100,
+        "warehouse": "West Coast Logistics",
+        "price": 60
+    },
+    {
+        "id": 6,
+        "name": "USB Drive",
+        "stock": 200,
+        "warehouse": "Tech Hub NY",
+        "price": 15
+    },
+    {
+        "id": 7,
+        "name": "Printer",
+        "stock": 15,
+        "warehouse": "Midwest Electronics Depot",
+        "price": 170
+    },
+    {
+        "id": 8,
+        "name": "Webcam",
+        "stock": 45,
+        "warehouse": "West Coast Logistics",
+        "price": 85
+    },
+    {
+        "id": 9,
+        "name": "External Hard Drive",
+        "stock": 25,
+        "warehouse": "Tech Hub NY",
+        "price": 130
+    },
+    {
+        "id": 10,
+        "name": "Tablet",
+        "stock": 20,
+        "warehouse": "Midwest Electronics Depot",
+        "price": 350
+    },
+    {
+        "id": 11,
+        "name": "Router",
+        "stock": 30,
+        "warehouse": "West Coast Logistics",
+        "price": 75
+    },
+    {
+        "id": 12,
+        "name": "Speakers",
+        "stock": 80,
+        "warehouse": "Tech Hub NY",
+        "price": 50
+    },
+    {
+        "id": 13,
+        "name": "Microphone",
+        "stock": 40,
+        "warehouse": "Midwest Electronics Depot",
+        "price": 100
+    },
+    {
+        "id": 14,
+        "name": "Laptop Stand",
+        "stock": 120,
+        "warehouse": "West Coast Logistics",
+        "price": 30
+    },
+    {
+        "id": 15,
+        "name": "Smartphone",
+        "stock": 35,
+        "warehouse": "Houston Tech Warehouse",
+        "price": 700
+    },
+    {
+        "id": 16,
+        "name": "Gaming Console",
+        "stock": 20,
+        "warehouse": "Houston Tech Warehouse",
+        "price": 500
+    },
+    {
+        "id": 17,
+        "name": "Projector",
+        "stock": 10,
+        "warehouse": "San Francisco Digital Storage",
+        "price": 900
+    },
+    {
+        "id": 18,
+        "name": "VR Headset",
+        "stock": 8,
+        "warehouse": "San Francisco Digital Storage",
+        "price": 400
+    },
+    {
+        "id": 19,
+        "name": "Smartwatch",
+        "stock": 50,
+        "warehouse": "Seattle Innovation Center",
+        "price": 250
+    },
+    {
+        "id": 20,
+        "name": "Drone",
+        "stock": 15,
+        "warehouse": "Seattle Innovation Center",
+        "price": 1200
+    }
+]

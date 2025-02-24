@@ -1,0 +1,108 @@
+[
+    {
+        "id": 1,
+        "type": "Sales",
+        "generatedOn": "2024-02-20",
+        "warehouse": "Tech Hub NY",
+        "items": [
+            1,
+            3,
+            6
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Stock Update",
+        "generatedOn": "2024-02-18",
+        "warehouse": "West Coast Logistics",
+        "items": [
+            2,
+            5,
+            11
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Inventory Adjustment",
+        "generatedOn": "2024-02-19",
+        "warehouse": "Midwest Electronics Depot",
+        "items": [
+            4,
+            7,
+            13
+        ]
+    },
+    {
+        "id": 4,
+        "type": "Purchase Order",
+        "generatedOn": "2024-02-21",
+        "warehouse": "Houston Tech Warehouse",
+        "items": [
+            15,
+            16
+        ]
+    },
+    {
+        "id": 5,
+        "type": "Shipping Manifest",
+        "generatedOn": "2024-02-22",
+        "warehouse": "San Francisco Digital Storage",
+        "items": [
+            17,
+            18
+        ]
+    },
+    {
+        "id": 6,
+        "type": "Returns",
+        "generatedOn": "2024-02-17",
+        "warehouse": "Seattle Innovation Center",
+        "items": [
+            19,
+            20
+        ]
+    },
+    {
+        "id": 7,
+        "type": "Damaged Goods",
+        "generatedOn": "2024-02-16",
+        "warehouse": "Tech Hub NY",
+        "items": [
+            9,
+            12
+        ]
+    },
+    {
+        "id": 8,
+        "type": "Monthly Report",
+        "generatedOn": "2024-02-23",
+        "warehouse": "West Coast Logistics",
+        "items": [
+            2,
+            5,
+            8,
+            14
+        ]
+    },
+    {
+        "id": 9,
+        "type": "Customer Feedback",
+        "generatedOn": "2024-02-24",
+        "warehouse": "Midwest Electronics Depot",
+        "items": [
+            4,
+            10,
+            13
+        ]
+    },
+    {
+        "id": 10,
+        "type": "Employee Performance",
+        "generatedOn": "2024-02-25",
+        "warehouse": "Houston Tech Warehouse",
+        "items": [
+            15,
+            16
+        ]
+    }
+]
