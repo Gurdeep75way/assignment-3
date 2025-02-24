@@ -1,157 +1,63 @@
-from fastapi import FastAPI
-import os
 import pickle
-import numpy as np
+import os
 import pandas as pd
-from pymongo import MongoClient
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-from sklearn.ensemble import GradientBoostingRegressor, IsolationForest
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-# ✅ Load Config Variables
-from config import MONGO_URI, DB_NAME
+import numpy as np
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import shap
 
-app = FastAPI()
+# ✅ Load Cleaned Data
+df = pd.read_csv("cleaned_dataset.csv")
 
-client = MongoClient(MONGO_URI)
-db = client[DB_NAME]
+# ✅ Feature Engineering
+df["sales_ratio"] = df["avg_sales_7d"] / (df["avg_sales_30d"] + 1e-5)  # Avoid division by zero
+df["profit_to_cost_ratio"] = df["profit_generated"] / (df["operating_costs"] + 1e-5)
+df["space_efficiency"] = df["stock_level"] / (df["space_utilization"] + 1e-5)
 
-# ✅ Load Pre-trained Models
-MODEL_PATH = "models/demand_forecasting.pkl"
-ENCODER_PATH = "models/label_encoder.pkl"
-SCALER_PATH = "models/scaler.pkl"
-ANOMALY_MODEL_PATH = "models/anomaly_model.pkl"
+# ✅ Features & Target Variable
+target = "quantity"
+features = [
+    "item_id", "category", "user_id", "supplier_id", "warehouse_id",
+    "stock_level", "restock_threshold", "profit_margin", "space_utilization",
+    "total_stock_value", "operating_costs", "profit_generated", "staff_count",
+    "avg_sales_7d", "avg_sales_30d", "profit_per_unit", "discount_rate", "adjusted_restock_time",
+    "year", "month", "day", "weekday", "sales_ratio", "profit_to_cost_ratio", "space_efficiency"
+]
 
-model = pickle.load(open(MODEL_PATH, "rb"))
-label_encoder = pickle.load(open(ENCODER_PATH, "rb"))
-scaler = pickle.load(open(SCALER_PATH, "rb"))
-anomaly_model = pickle.load(open(ANOMALY_MODEL_PATH, "rb"))
+X = df[features]
+y = df[target]
 
-# ✅ Fetch Data from MongoDB
-def fetch_collection(collection_name):
-    data = list(db[collection_name].find())
-    return pd.DataFrame(data) if data else pd.DataFrame()
+# ✅ Normalize Numerical Features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
 
-# ✅ Load & Merge Data
-def load_data():
-    sales = fetch_collection("sales")
-    inventory = fetch_collection("inventory")
-    warehouse = fetch_collection("warehouse")
-    suppliers = fetch_collection("suppliers")
+# ✅ Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
-    if sales.empty or inventory.empty:
-        return pd.DataFrame()
+# ✅ Use Gradient Boosting for Better Accuracy
+model = GradientBoostingRegressor(n_estimators=300, learning_rate=0.05, max_depth=5, random_state=42)
 
-    df = pd.merge(sales, inventory, on="item_id", how="left")
-    df = pd.merge(df, warehouse, on="warehouse_id", how="left")
-    df = pd.merge(df, suppliers, on="supplier_id", how="left")
+# ✅ Train Model
+model.fit(X_train, y_train)
 
-    df["total_revenue"] = df["price"] * df["quantity"]
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+# ✅ Evaluate Model
+y_pred = model.predict(X_test)
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
-    return df
+print(f"📊 Advanced Model Performance:\nMAE: {mae:.2f}, MSE: {mse:.2f}, R²: {r2:.2f}")
 
-df = load_data()
+# ✅ Feature Importance (SHAP Analysis)
+explainer = shap.Explainer(model, X_train)
+shap_values = explainer(X_test)
+shap.summary_plot(shap_values, X_test)
 
-# ✅ API Routes
+# ✅ Save Model
+os.makedirs("models", exist_ok=True)
+with open("models/advanced_sales_forecasting_model.pkl", "wb") as f:
+    pickle.dump(model, f)
 
-@app.get("/")
-def home():
-    return {"message": "Welcome to Inventory & Demand Forecasting API"}
-
-@app.get("/fetch_data/{collection_name}")
-def fetch_data(collection_name: str):
-    data = fetch_collection(collection_name)
-    return {"data": data.to_dict(orient="records")}
-
-@app.get("/forecast_demand")
-def forecast_demand():
-    """Predict future demand based on trained model"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    df["day_of_week"] = df["date"].dt.dayofweek
-    df["month"] = df["date"].dt.month
-    df["is_weekend"] = df["day_of_week"].apply(lambda x: 1 if x >= 5 else 0)
-    df["prev_sales"] = df.groupby("item_id")["quantity"].shift(1).fillna(0)
-    
-    features = ["item_id", "price", "prev_sales", "day_of_week", "month", "is_weekend"]
-    X = df[features]
-    
-    X["item_id"] = label_encoder.transform(X["item_id"])
-    X_scaled = scaler.transform(X)
-    
-    predictions = np.expm1(model.predict(X_scaled))
-    df["predicted_demand"] = predictions
-    
-    return {"predictions": df[["item_id", "predicted_demand"]].to_dict(orient="records")}
-
-@app.get("/anomaly_detection")
-def detect_anomalies():
-    """Detect anomalies using Isolation Forest"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    features = ["item_id", "price", "prev_sales", "day_of_week", "month", "is_weekend"]
-    X = df[features]
-    
-    X["item_id"] = label_encoder.transform(X["item_id"])
-    X_scaled = scaler.transform(X)
-    
-    df["anomaly_score"] = anomaly_model.decision_function(X_scaled)
-    df["is_anomaly"] = anomaly_model.predict(X_scaled)
-    
-    anomalies = df[df["is_anomaly"] == -1]
-    
-    return {"anomalies": anomalies.to_dict(orient="records")}
-
-@app.get("/supplier_performance")
-def supplier_performance():
-    """Analyze supplier performance"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    df_suppliers = df.groupby("supplier_id")["delivery_time"].mean().to_dict()
-    
-    return {"supplier_performance": df_suppliers}
-
-@app.get("/simulate_future_demand/{days}")
-def simulate_future_demand(days: int):
-    """Simulate future sales for a given number of days"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    future_dates = pd.date_range(df["date"].max(), periods=days)
-    X_scaled = scaler.transform(df[["item_id", "price", "prev_sales", "day_of_week", "month", "is_weekend"]].tail(days))
-    future_predictions = np.expm1(model.predict(X_scaled))
-
-    predictions = [{"date": str(date.date()), "predicted_sales": round(sales, 2)} 
-                   for date, sales in zip(future_dates, future_predictions)]
-    
-    return {"future_demand": predictions}
-
-@app.get("/automated_replenishment")
-def automated_replenishment():
-    """Identify items that need restocking"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    reorder_threshold = df["prev_sales"].quantile(0.75)
-    df_restock = df[df["stock"] < reorder_threshold]
-
-    return {"items_to_restock": df_restock[["item_id", "stock"]].to_dict(orient="records")}
-
-@app.get("/warehouse_optimization")
-def warehouse_optimization():
-    """Analyze warehouse efficiency"""
-    if df.empty:
-        return {"error": "No data available"}
-    
-    df_warehouse = df.groupby("warehouse_id").agg({"stock": "sum", "total_revenue": "sum"}).reset_index()
-    
-    return {"warehouse_data": df_warehouse.to_dict(orient="records")}
-
-# ✅ Run the API
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+print("🎯 Advanced model training complete! Saved as `models/advanced_sales_forecasting_model.pkl`.")
