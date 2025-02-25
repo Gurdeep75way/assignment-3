@@ -23,6 +23,8 @@ class TransactionRequest(BaseModel):
     product_id: int
     payment_method: str
 
+
+
 # ✅ API Endpoint: Predict Future Demand
 @app.get("/predict/demand/")
 async def get_predicted_demand():
