@@ -1,63 +1,54 @@
-import pickle
-import os
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import shap
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.layers import Embedding, Flatten, Dense, Input, Concatenate
+from sklearn.model_selection import train_test_split
+from pymongo import MongoClient
 
-# ✅ Load Cleaned Data
-df = pd.read_csv("cleaned_dataset.csv")
+# ✅ Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["InventoryDB"]
 
-# ✅ Feature Engineering
-df["sales_ratio"] = df["avg_sales_7d"] / (df["avg_sales_30d"] + 1e-5)  # Avoid division by zero
-df["profit_to_cost_ratio"] = df["profit_generated"] / (df["operating_costs"] + 1e-5)
-df["space_efficiency"] = df["stock_level"] / (df["space_utilization"] + 1e-5)
+# ✅ Load Transactions Data from MongoDB
+transactions = pd.DataFrame(list(db.transactions.find({}, {"_id": 0})))
+products = pd.DataFrame(list(db.products.find({}, {"_id": 0})))
 
-# ✅ Features & Target Variable
-target = "quantity"
-features = [
-    "item_id", "category", "user_id", "supplier_id", "warehouse_id",
-    "stock_level", "restock_threshold", "profit_margin", "space_utilization",
-    "total_stock_value", "operating_costs", "profit_generated", "staff_count",
-    "avg_sales_7d", "avg_sales_30d", "profit_per_unit", "discount_rate", "adjusted_restock_time",
-    "year", "month", "day", "weekday", "sales_ratio", "profit_to_cost_ratio", "space_efficiency"
-]
+# ✅ Merge with Product Data
+transactions = transactions.merge(products[["product_id", "category"]], on="product_id", how="left")
 
-X = df[features]
-y = df[target]
+# ✅ Encode Users & Products
+transactions["user_id"] = transactions["user_id"].astype("category").cat.codes
+transactions["product_id"] = transactions["product_id"].astype("category").cat.codes
 
-# ✅ Normalize Numerical Features
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# ✅ Split Data
+train, test = train_test_split(transactions, test_size=0.2, random_state=42)
 
-# ✅ Train-Test Split
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+# ✅ Model Architecture
+embedding_size = 50  # Size of embeddings
 
-# ✅ Use Gradient Boosting for Better Accuracy
-model = GradientBoostingRegressor(n_estimators=300, learning_rate=0.05, max_depth=5, random_state=42)
+user_input = Input(shape=(1,))
+product_input = Input(shape=(1,))
+
+user_embedding = Embedding(input_dim=transactions["user_id"].nunique(), output_dim=embedding_size)(user_input)
+product_embedding = Embedding(input_dim=transactions["product_id"].nunique(), output_dim=embedding_size)(product_input)
+
+user_vec = Flatten()(user_embedding)
+product_vec = Flatten()(product_embedding)
+
+concat = Concatenate()([user_vec, product_vec])
+dense1 = Dense(128, activation="relu")(concat)
+dense2 = Dense(64, activation="relu")(dense1)
+output = Dense(1, activation="sigmoid")(dense2)
+
+model = keras.Model([user_input, product_input], output)
+
+# ✅ Compile Model
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
 
 # ✅ Train Model
-model.fit(X_train, y_train)
-
-# ✅ Evaluate Model
-y_pred = model.predict(X_test)
-mae = mean_absolute_error(y_test, y_pred)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print(f"📊 Advanced Model Performance:\nMAE: {mae:.2f}, MSE: {mse:.2f}, R²: {r2:.2f}")
-
-# ✅ Feature Importance (SHAP Analysis)
-explainer = shap.Explainer(model, X_train)
-shap_values = explainer(X_test)
-shap.summary_plot(shap_values, X_test)
+model.fit([train["user_id"], train["product_id"]], np.ones(len(train)), epochs=5, batch_size=32, validation_split=0.1)
 
 # ✅ Save Model
-os.makedirs("models", exist_ok=True)
-with open("models/advanced_sales_forecasting_model.pkl", "wb") as f:
-    pickle.dump(model, f)
-
-print("🎯 Advanced model training complete! Saved as `models/advanced_sales_forecasting_model.pkl`.")
+model.save("recommendation_model.h5")
+print("🎉 Model trained and saved successfully!")

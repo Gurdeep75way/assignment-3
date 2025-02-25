@@ -1,0 +1,201 @@
+warehouse_id,warehouse_name,location,capacity,supplier_id
+1,WH-1,Spencertown,8102,446
+2,WH-2,West Markland,8312,318
+3,WH-3,Roberthaven,6320,350
+4,WH-4,South Briannamouth,7132,95
+5,WH-5,Freemanmouth,8891,152
+6,WH-6,Mitchellfurt,3779,311
+7,WH-7,Chadberg,1924,137
+8,WH-8,North Jenniferbury,2581,247
+9,WH-9,Jasonfurt,8714,387
+10,WH-10,Port Micheleside,4324,243
+11,WH-11,Thomasbury,6713,31
+12,WH-12,South Jessicaville,8026,40
+13,WH-13,Leeland,1255,229
+14,WH-14,Port Karen,5804,36
+15,WH-15,New Kathryn,2838,408
+16,WH-16,Samanthaburgh,1009,223
+17,WH-17,East Michaeltown,3871,6
+18,WH-18,Geraldport,9989,322
+19,WH-19,Davismouth,8409,468
+20,WH-20,North Samantha,8418,220
+21,WH-21,Nicoleshire,6124,75
+22,WH-22,West Patricia,2015,4
+23,WH-23,Port Andreside,3193,335
+24,WH-24,Dodsonton,9415,134
+25,WH-25,Leechester,8449,118
+26,WH-26,Port Teresaport,5158,369
+27,WH-27,Richardsonburgh,4925,94
+28,WH-28,Port Johnton,7970,486
+29,WH-29,North Meaganfort,7938,435
+30,WH-30,Codyfort,5784,62
+31,WH-31,Kellyborough,5000,441
+32,WH-32,North Rebecca,2633,194
+33,WH-33,New Nicholas,8266,335
+34,WH-34,Emmahaven,9702,203
+35,WH-35,South Erin,1384,392
+36,WH-36,Johnsonport,1404,26
+37,WH-37,Port Leonard,9175,435
+38,WH-38,Garciaborough,3000,173
+39,WH-39,Port Francisbury,6989,300
+40,WH-40,East Bonnie,2460,133
+41,WH-41,Christopherchester,8190,326
+42,WH-42,Foxchester,8140,410
+43,WH-43,Campbellfurt,4636,118
+44,WH-44,Hernandezton,5809,324
+45,WH-45,Josemouth,5178,275
+46,WH-46,New Stephanie,8245,212
+47,WH-47,Taylorland,7600,225
+48,WH-48,South Dennisstad,6997,20
+49,WH-49,South Suzannefort,3048,113
+50,WH-50,East Ashleyland,5780,140
+51,WH-51,North Kenneth,1716,47
+52,WH-52,Fernandoville,8939,1
+53,WH-53,Henryberg,6565,90
+54,WH-54,Mooreton,5544,142
+55,WH-55,West Brandon,5976,320
+56,WH-56,Lake Dustinhaven,4419,38
+57,WH-57,Ashleytown,8239,293
+58,WH-58,North John,1249,382
+59,WH-59,Robertsburgh,9865,139
+60,WH-60,Smithshire,1770,356
+61,WH-61,Gabrielhaven,5363,333
+62,WH-62,Jamesborough,2077,491
+63,WH-63,Port Kristinbury,9427,259
+64,WH-64,Lake Andrea,9580,161
+65,WH-65,New Ryan,8901,390
+66,WH-66,Barnesmouth,5858,178
+67,WH-67,Abigailmouth,7544,10
+68,WH-68,North Matthewhaven,5719,261
+69,WH-69,Schultzshire,3814,407
+70,WH-70,Lake Meredithmouth,4374,138
+71,WH-71,Lake Crystalchester,2252,172
+72,WH-72,East Jeffrey,7996,386
+73,WH-73,New Bryan,5673,13
+74,WH-74,Lisahaven,5530,168
+75,WH-75,Cooperland,7881,130
+76,WH-76,Victoriaport,7949,84
+77,WH-77,Cherylbury,7241,321
+78,WH-78,Martinezview,9017,319
+79,WH-79,Ashleyfort,7941,101
+80,WH-80,Davisstad,8002,329
+81,WH-81,Newmantown,2331,273
+82,WH-82,North Stephanieport,5261,265
+83,WH-83,Lake Wesleymouth,8648,459
+84,WH-84,Port Rebeccaville,6115,399
+85,WH-85,Meltonchester,5637,408
+86,WH-86,Skinnershire,5854,38
+87,WH-87,Murphytown,4177,419
+88,WH-88,New Codyborough,8730,94
+89,WH-89,Sarafort,3180,95
+90,WH-90,Marktown,5892,305
+91,WH-91,North Raymond,8043,69
+92,WH-92,West Micheal,1137,318
+93,WH-93,Codybury,7327,444
+94,WH-94,Smithville,4472,236
+95,WH-95,Nicholasview,6449,434
+96,WH-96,East Markchester,3832,334
+97,WH-97,East Michael,4579,373
+98,WH-98,East Oliviamouth,6971,376
+99,WH-99,Bateston,5164,459
+100,WH-100,West Jessicaville,8941,137
+101,WH-101,Susanshire,6569,418
+102,WH-102,Josephside,5300,76
+103,WH-103,North Timothy,7269,483
+104,WH-104,East Danielle,4818,35
+105,WH-105,Morrisside,2906,1
+106,WH-106,Elizabethville,7254,296
+107,WH-107,South Danaville,1760,320
+108,WH-108,New Jesse,8830,406
+109,WH-109,Port Rachel,8350,60
+110,WH-110,Port Shaneton,7238,320
+111,WH-111,Timport,7090,349
+112,WH-112,Gallagherberg,7031,328
+113,WH-113,West Joy,8687,267
+114,WH-114,East Suzanne,9472,361
+115,WH-115,Palmerborough,2887,229
+116,WH-116,New Tyler,4266,270
+117,WH-117,New Connie,1666,316
+118,WH-118,North Alishastad,5188,286
+119,WH-119,Matthewshaven,1671,291
+120,WH-120,Clementsstad,7777,213
+121,WH-121,Sharonstad,8570,165
+122,WH-122,Jenkinsbury,8956,5
+123,WH-123,New Steve,6124,339
+124,WH-124,South Christopherville,6585,379
+125,WH-125,Alexanderville,5777,78
+126,WH-126,Summerview,4900,410
+127,WH-127,New Kennethfort,7677,62
+128,WH-128,Lake David,7981,132
+129,WH-129,Amyland,7376,89
+130,WH-130,Novakhaven,1523,237
+131,WH-131,Chapmanstad,3393,42
+132,WH-132,North Christopher,3593,89
+133,WH-133,South Joanne,8240,402
+134,WH-134,Anitaton,7937,296
+135,WH-135,Laurentown,7190,328
+136,WH-136,Aliciatown,6240,295
+137,WH-137,Lake Stevenburgh,7493,104
+138,WH-138,Shannonfort,3878,14
+139,WH-139,Terristad,5143,288
+140,WH-140,Teresaport,4644,179
+141,WH-141,Hurleytown,5432,125
+142,WH-142,Ryanshire,2276,422
+143,WH-143,East Tracy,6811,353
+144,WH-144,North Mary,1302,23
+145,WH-145,Jenniferland,1638,63
+146,WH-146,Wadechester,1055,143
+147,WH-147,Marquezburgh,9717,481
+148,WH-148,New Joshua,9150,153
+149,WH-149,Lake Eileen,3125,145
+150,WH-150,Port Zoe,1364,225
+151,WH-151,Dennisfort,7809,495
+152,WH-152,West Timothystad,5621,450
+153,WH-153,Kimberlyfurt,6126,462
+154,WH-154,West Amyview,6122,309
+155,WH-155,Beltranfort,2646,104
+156,WH-156,North Juanland,1918,104
+157,WH-157,West Andrew,3797,435
+158,WH-158,Brandichester,7506,39
+159,WH-159,Patrickmouth,6870,435
+160,WH-160,South Tamara,2531,198
+161,WH-161,Lisamouth,9172,134
+162,WH-162,West Brandyland,4345,67
+163,WH-163,East Evan,8673,391
+164,WH-164,Port Ryan,7949,179
+165,WH-165,West Robert,7882,456
+166,WH-166,Amandashire,2906,42
+167,WH-167,West Christophershire,4086,448
+168,WH-168,South Michaelville,9152,500
+169,WH-169,Martinezmouth,6750,15
+170,WH-170,Tranmouth,9905,111
+171,WH-171,Hayesshire,2062,157
+172,WH-172,Peterside,2976,289
+173,WH-173,Lake Heatherview,2296,500
+174,WH-174,Guzmanbury,7229,478
+175,WH-175,Port Stephanieville,8641,231
+176,WH-176,East Dawn,1125,411
+177,WH-177,North Leonard,5632,420
+178,WH-178,West Sandrahaven,7288,157
+179,WH-179,Hancockville,4596,38
+180,WH-180,North Tracymouth,7168,441
+181,WH-181,Grahamborough,8561,97
+182,WH-182,Zhangland,9258,485
+183,WH-183,East Ronaldstad,1232,411
+184,WH-184,Emilyfurt,7371,439
+185,WH-185,New William,5206,289
+186,WH-186,South Ericton,8943,254
+187,WH-187,Jonesborough,7891,196
+188,WH-188,East Victor,7738,86
+189,WH-189,North Samantha,3472,322
+190,WH-190,Port Sandra,3739,10
+191,WH-191,Port Donaldbury,6401,5
+192,WH-192,Phillipfort,2761,123
+193,WH-193,Finleyville,1876,330
+194,WH-194,Lake Kathleenstad,4812,353
+195,WH-195,Juliestad,2460,118
+196,WH-196,Lake Tara,2733,294
+197,WH-197,North Daniellebury,2605,397
+198,WH-198,Chelseaview,6622,159
+199,WH-199,Castillofort,7767,303
+200,WH-200,Port Jamesstad,7986,228

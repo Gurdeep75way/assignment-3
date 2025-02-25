@@ -1,7 +1,7 @@
 import os
 
 # MongoDB Configuration
-MONGO_URI = "mongodb+srv://Gurdeep3251:Gurdeep%403251@cluster0.jyi7m.mongodb.net/test?retryWrites=true&w=majority"
+MONGO_URI = "mongodb://localhost:27017/"
 DB_NAME = "InventoryDB"
 
 # API Configuration
